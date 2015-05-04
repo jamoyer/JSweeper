@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,14 +28,13 @@ import javax.swing.SwingConstants;
 public class JSweeperUI extends JPanel
 {
 
-    private JMinefieldModel model;
+    private final JMinefieldModel model;
     private JFaceButton faceButton;
     private JFlagCounter flagCounter;
 
     /**
-     * The constructor takes in a model and JMinefield(JTable) to be placed in
-     * the UI
-     * 
+     * The constructor takes in a model and JMinefield(JTable) to be placed in the UI
+     *
      * @param model
      *            the model
      * @param minefield
@@ -52,7 +52,7 @@ public class JSweeperUI extends JPanel
 
     /**
      * The Game controller button getter
-     * 
+     *
      * @return game controller button
      */
     public JFaceButton getFace()
@@ -62,7 +62,7 @@ public class JSweeperUI extends JPanel
 
     /**
      * The flag counter label getter
-     * 
+     *
      * @return flag counter
      */
     public JFlagCounter getFlagCounter()
@@ -75,14 +75,14 @@ public class JSweeperUI extends JPanel
      */
     private JPanel menuPanel()
     {
-        JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        final JPanel menuPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
         // main menu bar
-        JMenuBar mainMenu = new JMenuBar();
+        final JMenuBar mainMenu = new JMenuBar();
 
-        JMenu gameMenu = new JMenu("Game");
+        final JMenu gameMenu = new JMenu("Game");
 
         // Beginner difficulty button
-        JMenuItem beginnerItem = new JMenuItem("Beginner");
+        final JMenuItem beginnerItem = new JMenuItem("Beginner");
         beginnerItem.addActionListener(new ActionListener()
         {
             @Override
@@ -94,7 +94,7 @@ public class JSweeperUI extends JPanel
         gameMenu.add(beginnerItem);
 
         // Intermediate difficulty button
-        JMenuItem intermediateItem = new JMenuItem("Intermediate");
+        final JMenuItem intermediateItem = new JMenuItem("Intermediate");
         intermediateItem.addActionListener(new ActionListener()
         {
             @Override
@@ -106,7 +106,7 @@ public class JSweeperUI extends JPanel
         gameMenu.add(intermediateItem);
 
         // Expert difficulty button
-        JMenuItem expertItem = new JMenuItem("Expert");
+        final JMenuItem expertItem = new JMenuItem("Expert");
         expertItem.addActionListener(new ActionListener()
         {
             @Override
@@ -118,55 +118,50 @@ public class JSweeperUI extends JPanel
         gameMenu.add(expertItem);
 
         // Expert difficulty button
-        JMenuItem customItem = new JMenuItem("Custom");
+        final JMenuItem customItem = new JMenuItem("Custom");
         customItem.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent arg0)
             {
-                JPanel custom = new JPanel(new BorderLayout(5, 5));
+                final JPanel custom = new JPanel(new BorderLayout(5, 5));
 
-                JPanel labels = new JPanel(new GridLayout(0, 1, 2, 2));
+                final JPanel labels = new JPanel(new GridLayout(0, 1, 2, 2));
                 labels.add(new JLabel("Rows:", SwingConstants.RIGHT));
                 labels.add(new JLabel("Columns:", SwingConstants.RIGHT));
                 labels.add(new JLabel("Mines:", SwingConstants.RIGHT));
                 custom.add(labels, BorderLayout.WEST);
 
-                JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+                final JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
 
-                JTextField rows = new JTextField();
+                final JTextField rows = new JTextField();
                 controls.add(rows);
 
-                JTextField cols = new JTextField();
+                final JTextField cols = new JTextField();
                 controls.add(cols);
 
-                JTextField mines = new JTextField();
+                final JTextField mines = new JTextField();
                 controls.add(mines);
 
                 custom.add(controls, BorderLayout.CENTER);
 
                 // Ask for values with dialog box
-                JOptionPane.showMessageDialog(null, custom, "Custom Game",
-                        JOptionPane.QUESTION_MESSAGE);
+                JOptionPane.showMessageDialog(null, custom, "Custom Game", JOptionPane.QUESTION_MESSAGE);
 
-                model.setDifficulty(Difficulty.Custom,
-                        Integer.parseInt(rows.getText()),
-                        Integer.parseInt(cols.getText()),
-                        Integer.parseInt(mines.getText()));
+                model.setDifficulty(Difficulty.Custom, Integer.parseInt(rows.getText()), Integer.parseInt(cols.getText()), Integer.parseInt(mines.getText()));
             }
         });
         gameMenu.add(customItem);
 
         // display high scores button
-        JMenuItem highScores = new JMenuItem("High Scores");
+        final JMenuItem highScores = new JMenuItem("High Scores");
         highScores.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent arg0)
             {
 
-                ArrayList<JSweeperHighScore> highScores = (ArrayList<JSweeperHighScore>) HighScoreHandler
-                        .getHighScores();
+                final ArrayList<JSweeperHighScore> highScores = (ArrayList<JSweeperHighScore>) HighScoreHandler.getHighScores();
 
                 int bs, is, es;
                 String bw, iw, ew;
@@ -189,25 +184,21 @@ public class JSweeperUI extends JPanel
                     ew = highScores.get(2).getWinner();
                 }
 
-                JPanel highScoresPanel = new JPanel(new BorderLayout(5, 5));
+                final JPanel highScoresPanel = new JPanel(new BorderLayout(5, 5));
 
-                JPanel labels = new JPanel(new GridLayout(0, 1, 2, 2));
-                labels.add(new JLabel("Beginner: " + bw + " : " + bs,
-                        SwingConstants.RIGHT));
-                labels.add(new JLabel("Intermediate: " + iw + " : " + is,
-                        SwingConstants.RIGHT));
-                labels.add(new JLabel("Expert: " + ew + " : " + es,
-                        SwingConstants.RIGHT));
+                final JPanel labels = new JPanel(new GridLayout(0, 1, 2, 2));
+                labels.add(new JLabel("Beginner: " + bw + " : " + bs, SwingConstants.RIGHT));
+                labels.add(new JLabel("Intermediate: " + iw + " : " + is, SwingConstants.RIGHT));
+                labels.add(new JLabel("Expert: " + ew + " : " + es, SwingConstants.RIGHT));
                 highScoresPanel.add(labels, BorderLayout.WEST);
 
-                JOptionPane.showMessageDialog(null, highScoresPanel,
-                        "High Scores", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, highScoresPanel, "High Scores", JOptionPane.PLAIN_MESSAGE);
             }
         });
         gameMenu.add(highScores);
 
         // exit game button
-        JMenuItem exitItem = new JMenuItem("Exit");
+        final JMenuItem exitItem = new JMenuItem("Exit");
         exitItem.addActionListener(new ActionListener()
         {
             @Override
@@ -221,17 +212,14 @@ public class JSweeperUI extends JPanel
         mainMenu.add(gameMenu);
 
         // help submenu with about button
-        JMenu helpMenu = new JMenu("Help");
-        JMenuItem aboutItem = new JMenuItem("About JSweeper...");
+        final JMenu helpMenu = new JMenu("Help");
+        final JMenuItem aboutItem = new JMenuItem("About JSweeper...");
         aboutItem.addActionListener(new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent arg0)
             {
-                JOptionPane
-                        .showMessageDialog(
-                                new JFrame(),
-                                "Created by: Jacob Moyer, Matt Clucas, Mike Mead.\n\nComing soon: Shark mode and Batman mode!");
+                JOptionPane.showMessageDialog(new JFrame(), "Created by: Jacob Moyer, Matt Clucas, Mike Mead.\n\nComing soon: Shark mode and Batman mode!");
             }
         });
 
@@ -248,8 +236,8 @@ public class JSweeperUI extends JPanel
      */
     private JPanel headerPanel()
     {
-        JPanel headerPanel = new JPanel();
-        JLabel heading = new JLabel("Minesweeper");
+        final JPanel headerPanel = new JPanel();
+        final JLabel heading = new JLabel("Minesweeper");
         heading.setHorizontalAlignment(SwingConstants.CENTER);
         heading.setFont(new Font(Font.MONOSPACED, Font.BOLD, 20));
         headerPanel.add(heading);
@@ -261,30 +249,31 @@ public class JSweeperUI extends JPanel
      */
     private JPanel bodyPanel()
     {
-        JPanel bodyPanel = new JPanel();
+        final JPanel bodyPanel = new JPanel();
         bodyPanel.setLayout(new BoxLayout(bodyPanel, BoxLayout.X_AXIS));
 
         // //////////////////////////////
         // // JFlagCounter Panel
-        JPanel flagCounterPanel = new JPanel(new FlowLayout());
+        final JPanel flagCounterPanel = new JPanel(new FlowLayout());
         flagCounter = new JFlagCounter();
         flagCounterPanel.add(flagCounter);
         bodyPanel.add(flagCounterPanel);
 
         // //////////////////////////////
         // // JFaceButton Panel
-        JPanel faceButtonPanel = new JPanel(new FlowLayout());
+        final JPanel faceButtonPanel = new JPanel(new FlowLayout());
         faceButton = new JFaceButton();
         faceButtonPanel.add(faceButton);
         bodyPanel.add(faceButtonPanel);
 
         // //////////////////////////////
         // // Timer Panel
-        JPanel timerPanel = new JPanel(new FlowLayout());
+        final JPanel timerPanel = new JPanel(new FlowLayout());
         final JTimerLabel timerLabel = new JTimerLabel();
         timerPanel.add(timerLabel);
-        Thread timerThread = new Thread(new Runnable()
+        final Thread timerThread = new Thread(new Runnable()
         {
+            @Override
             public void run()
             {
                 while (true)
@@ -294,11 +283,10 @@ public class JSweeperUI extends JPanel
                     {
                         Thread.sleep(500);
                     }
-                    catch (InterruptedException e)
+                    catch (final InterruptedException e)
                     {
                         // Should never happen
-                        System.out
-                                .println("Timer update thread interrupted. Critical Error!");
+                        System.out.println("Timer update thread interrupted. Critical Error!");
                         System.exit(-1);
                     }
                 }
@@ -313,7 +301,7 @@ public class JSweeperUI extends JPanel
     // panel to contain the JMinefield
     private JPanel fieldPanel(JMinefield field)
     {
-        JPanel fieldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        final JPanel fieldPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         fieldPanel.add(field);
 
         return fieldPanel;

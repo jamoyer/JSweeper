@@ -6,7 +6,7 @@ import javax.swing.table.AbstractTableModel;
 
 /**
  * Represents a Minefield.
- * 
+ *
  * @author Matt Clucas, Mike Mead, and Jacob Moyer
  *
  */
@@ -20,24 +20,23 @@ public class JMinefieldModel extends AbstractTableModel
     private int numVisited;
     private int time;
     private Difficulty difficulty;
-    private ArrayList<GameSettingsListener> listeners = new ArrayList<GameSettingsListener>();
+    private final ArrayList<GameSettingsListener> listeners = new ArrayList<GameSettingsListener>();
 
     /**
-     * Overloaded constructor. Takes a difficulty and creates a JMinefieldModel
-     * based off of its built in parameters.
-     * 
+     * Overloaded constructor. Takes a difficulty and creates a JMinefieldModel based off of its
+     * built in parameters.
+     *
      * @param difficulty
      */
     public JMinefieldModel(Difficulty difficulty)
     {
-        this(difficulty, difficulty.getRows(), difficulty.getCols(), difficulty
-                .getMines());
+        this(difficulty, difficulty.getRows(), difficulty.getCols(), difficulty.getMines());
     }
 
     /**
-     * Default constructor. Takes in difficulty, rows, columns, and mines and
-     * creates a new JMinefieldModel.
-     * 
+     * Default constructor. Takes in difficulty, rows, columns, and mines and creates a new
+     * JMinefieldModel.
+     *
      * @param difficulty
      * @param rows
      * @param cols
@@ -54,39 +53,38 @@ public class JMinefieldModel extends AbstractTableModel
     }
 
     /**
-     * Overloaded method. Takes in a difficulty and reinitializes the minefield
-     * with its built in parameters.
-     * 
+     * Overloaded method. Takes in a difficulty and reinitializes the minefield with its built in
+     * parameters.
+     *
      * @param difficulty
      */
     public void setDifficulty(Difficulty difficulty)
     {
-        setDifficulty(difficulty, difficulty.getRows(), difficulty.getCols(),
-                difficulty.getMines());
+        setDifficulty(difficulty, difficulty.getRows(), difficulty.getCols(), difficulty.getMines());
     }
 
     /**
-     * Reinitializes the minefield given a new difficulty, rows, columns, and
-     * mines.
-     * 
+     * Reinitializes the minefield given a new difficulty, rows, columns, and mines.
+     *
      * @param difficulty
      * @param rows
      * @param cols
      * @param mines
      */
-    public void setDifficulty(Difficulty difficulty, int rows, int cols,
-            int mines)
+    public void setDifficulty(Difficulty difficulty, int rows, int cols, int mines)
     {
         grid = new JTile[rows][cols];
         this.difficulty = difficulty;
         this.mines = mines;
-        for (GameSettingsListener listener : listeners)
+        for (final GameSettingsListener listener : listeners)
+        {
             listener.difficultyChanged();
+        }
     }
 
     /**
      * Returns the difficulty for this minefield.
-     * 
+     *
      * @return
      */
     public Difficulty getDifficulty()
@@ -96,7 +94,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Adds a listener for when game settings change in the model.
-     * 
+     *
      * @param newListener
      */
     public void addListener(GameSettingsListener newListener)
@@ -106,7 +104,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Returns the time this game has been running.
-     * 
+     *
      * @return
      */
     public int getTime()
@@ -116,7 +114,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Sets the time this game has been running.
-     * 
+     *
      * @param time
      */
     public void setTime(int time)
@@ -144,7 +142,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Sets the JTile at this position.
-     * 
+     *
      * @param row
      * @param col
      * @param val
@@ -156,7 +154,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Returns the total number of flags that have been placed.
-     * 
+     *
      * @return
      */
     public int getFlagCount()
@@ -166,7 +164,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Returns the number of tiles that have been visited.
-     * 
+     *
      * @return
      */
     public int getNumVisited()
@@ -176,7 +174,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Sets the number of flags that have been placed.
-     * 
+     *
      * @param flagCount
      */
     public void setFlagCount(int flagCount)
@@ -186,7 +184,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Sets the number of tiles that have been visited.
-     * 
+     *
      * @param numVisited
      */
     public void setNumVisited(int numVisited)
@@ -196,7 +194,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Returns the number of mines.
-     * 
+     *
      * @return
      */
     public int getMines()
@@ -206,7 +204,7 @@ public class JMinefieldModel extends AbstractTableModel
 
     /**
      * Sets the number of mines.
-     * 
+     *
      * @param mines
      */
     public void setMines(int mines)
