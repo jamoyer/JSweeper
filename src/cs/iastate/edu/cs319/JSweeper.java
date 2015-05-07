@@ -49,7 +49,7 @@ public class JSweeper extends JFrame implements GameSettingsListener
         });
     }
 
-    public static void centreWindow(Window frame)
+    public static void centerWindow(Window frame)
     {
         final Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         final int x = (int) ((dimension.getWidth() - frame.getWidth()) / 2);
@@ -109,7 +109,7 @@ public class JSweeper extends JFrame implements GameSettingsListener
         buildUI();
         setContentPane(view);
         pack();
-        centreWindow(this);
+        centerWindow(this);
     }
 
     /*
